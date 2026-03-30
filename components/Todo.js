@@ -4,6 +4,23 @@ class Todo {
     this._templateElement = document.querySelector("#todo-template");
   }
 
+  setEventListeners() {
+    this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+    this._todoCheckboxEl.addEventListener("change", (event) => {
+      this._data.completed = event.target.checked;
+      console.log(this._data.completed);
+    });
+  }
+
+  generateCheckboxEl() {
+    this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+    this._todoLabel = this._todoElement.querySelector(".todo__label");
+    this._todoCheckboxEl.checked = this._data.completed;
+    this._todoCheckboxEl.id = `todo-${this._data.id}`;
+    this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
+    return this._todoLabel;
+  }
+
   getView() {
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
@@ -18,8 +35,9 @@ class Todo {
     todoNameEl.textContent = this._data.name;
     todoCheckboxEl.checked = this._data.completed;
 
-    // Apply id and for attributes.
-    // The id will initially be undefined for new todos.
+    this._generateCheckboxEl();
+    this._setEventListeners();
+
     todoCheckboxEl.id = `todo-${this._data.id}`;
     todoLabel.setAttribute("for", `todo-${this._data.id}`);
 
