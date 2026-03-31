@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-console.log(uuidv4());
 
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
@@ -21,7 +20,6 @@ const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopup.querySelector(".popup__form");
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
-const todoTemplate = document.querySelector("#todo-template");
 const todosList = document.querySelector(".todos__list");
 
 const openModal = (modal) => {
@@ -90,9 +88,12 @@ addTodoForm.addEventListener("submit", (evt) => {
   const todo = generateTodo(values);
   todosList.append(todo);
   closeModal(addTodoPopup);
+
+  addTodoForm.reset();
 });
 
 initialTodos.forEach((item) => {
+  renderTodo(item) { const el = generateTodo(item); todosList.append(el); }
   const todo = generateTodo(item);
   todosList.append(todo);
 });

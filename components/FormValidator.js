@@ -27,16 +27,15 @@ class FormValidator {
       this._formElement.querySelectorAll(this._inputSelector),
     );
 
-    const submitButton = this._formElement.querySelector(
-      this._submitButtonSelector,
-    );
+    const submitButton = this._formElement.querySelector(this._formSelector);
 
     this._toggleButtonState(inputElements, submitButton);
+    this._inputElements = inputElements;
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputElements, submitButton);
+        this._toggleButtonState(this._inputElements, submitButton);
       });
     });
   }
