@@ -83,20 +83,25 @@ addTodoForm.addEventListener("submit", (evt) => {
   // Create a date object and adjust for timezone
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
+  resetValidation();
   const id = uuidv4();
   const values = { id, name, date };
-  const todo = generateTodo(values);
-  todosList.append(todo);
+  const renderTodo = (item) => {
+    const todo = generateTodo(item);
+    todosList.append(todo);
+  };
+  renderTodo(values);
   closeModal(addTodoPopup);
 
   addTodoForm.reset();
 });
 
 initialTodos.forEach((item) => {
+  const renderTodo = (item) => {
+    const todo = generateTodo(item);
+    todosList.append(todo);
+  };
   renderTodo(item);
-  const el = generateTodo(item);
-  todosList.append(el);
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);

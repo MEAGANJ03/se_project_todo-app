@@ -40,6 +40,11 @@ class FormValidator {
     });
   }
 
+  resetValidation() {
+    const submitButton = this._formElement.querySelector(this._formSelector);
+    this._toggleButtonState(this._inputElements, submitButton);
+  }
+
   enableValidation() {
     this._formElement.addEventListener("submit", (event) => {
       event.preventDefault();
